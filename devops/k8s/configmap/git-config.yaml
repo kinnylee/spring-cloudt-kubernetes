@@ -8,3 +8,4 @@ data:
   GIT_BRANCH: master
   GIT_USERNAME: root
   GIT_PASSWORD: "123456"
+  GIT_SEARCH_PATH: config-server

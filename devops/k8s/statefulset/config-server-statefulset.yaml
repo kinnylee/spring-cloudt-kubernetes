@@ -41,6 +41,11 @@ spec:
                 configMapKeyRef:
                   key: GIT_BRANCH
                   name: git-config
+            - name: GIT_SEARCH_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_SEARCH_PATH
+                  name: git-config
             - name: GIT_USERNAME
               valueFrom:
                 configMapKeyRef:

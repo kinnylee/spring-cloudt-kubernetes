@@ -14,4 +14,5 @@ spring:
           username: ${GIT_USERNAME:root}
           password: ${GIT_PASSWORD:123456}
           default-label: ${GIT_BRANCH:master} #配置文件分支
+          search-paths: ${GIT_SEARCH_PATH:config-server}
 
