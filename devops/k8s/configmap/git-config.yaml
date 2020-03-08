@@ -6,3 +6,5 @@ metadata:
 data:
   GIT_URI: http://10.129.247.100/git/ptc-config-local.git
   GIT_BRANCH: master
+  GIT_USERNAME: root
+  GIT_PASSWORD: "123456"

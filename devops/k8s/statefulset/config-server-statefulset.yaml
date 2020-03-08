@@ -43,14 +43,14 @@ spec:
                   name: git-config
             - name: GIT_USERNAME
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   key: GIT_USERNAME
-                  name: git-secret
+                  name: git-config
             - name: GIT_PASSWORD
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   key: GIT_PASSWORD
-                  name: git-secret
+                  name: git-config
           resources:
             requests:
               cpu: 500m
