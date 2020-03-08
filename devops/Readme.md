@@ -11,3 +11,4 @@
 ### Cannot clone or checkout repository
 
 * 查看服务日志，报错：not authorized，账号信息没有识别到
+* 账号密码放在configmap中没问题，放入secret中就报错！
