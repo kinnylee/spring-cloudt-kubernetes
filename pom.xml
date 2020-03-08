@@ -73,6 +73,12 @@
                 </includes>
                 <targetPath>../docker</targetPath>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.yaml</include>
+                </includes>
+            </resource>
         </resources>
         <plugins>
             <plugin>

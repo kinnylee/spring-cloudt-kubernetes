@@ -1,3 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-server
+  namespace: test
+spec:
+  selector:
+    app: eureka-server
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -31,10 +47,18 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: EUREKA_INSTANCE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
             - name: EUREKA_SERVER
               valueFrom:
                 configMapKeyRef:
-                  key: eureka-server-defaultZone
+                  key: eureka-server
                   name: eureka-server
           resources:
             requests:

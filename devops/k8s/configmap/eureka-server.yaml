@@ -4,5 +4,4 @@ metadata:
   name: eureka-server
   namespace: test
 data:
-  eureka-server-defaultZone: "http://eureka-server-0:8080/eureka,http://eureka-server-0:8080/eureka,http://eureka-server-0:8080/eureka"
-  eureka-server: "http://eureka-server/eureka"
+  eureka-server: "http://eureka-server-0.eureka-server.test:8080/eureka,http://eureka-server-1.eureka-server.test:8080/eureka,http://eureka-server-2.eureka-server.test:8080/eureka"
