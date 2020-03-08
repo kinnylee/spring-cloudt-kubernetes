@@ -5,3 +5,4 @@ metadata:
   namespace: test
 data:
   GIT_URI: http://10.129.247.100/git/ptc-config-local.git
+  GIT_BRANCH: master

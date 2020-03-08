@@ -36,6 +36,11 @@ spec:
                 configMapKeyRef:
                   key: GIT_URI
                   name: git-config
+            - name: GIT_BRANCH
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_BRANCH
+                  name: git-config
             - name: GIT_USERNAME
               valueFrom:
                 secretKeyRef:
