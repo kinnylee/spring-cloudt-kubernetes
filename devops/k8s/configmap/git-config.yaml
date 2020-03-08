@@ -4,8 +4,8 @@ metadata:
   name: git-config
   namespace: test
 data:
-  GIT_URI: http://10.129.247.100/git/ptc-config-local.git
+  GIT_URI: https://github.com/kinnylee/spring-cloudt-kubernetes.git
   GIT_BRANCH: master
-  GIT_USERNAME: root
-  GIT_PASSWORD: "123456"
+  GIT_USERNAME: ""
+  GIT_PASSWORD: ""
   GIT_SEARCH_PATH: config-server
