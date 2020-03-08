@@ -1,7 +1,7 @@
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_SERVER}
+      defaultZone: ${EUREKA_SERVER:http://localhost:8080/eureka}
 
 spring:
   application:
@@ -10,7 +10,8 @@ spring:
     config:
       server:
         git:
-          uri: ${GIT_URI}
-          username: ${GIT_USERNAME}
-          password: ${GIT_PASSWORD}
+          uri: ${GIT_URI:http://10.129.247.100/git/ptc-config-local.git}
+          username: ${GIT_USERNAME:root}
+          password: ${GIT_PASSWORD:123456}
           default-label: ${GIT_BRANCH:master} #配置文件分支
+
