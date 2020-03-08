@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      imagePullSecrets:
+        - name: aliyun-registry
+      containers:
+        - name: user-service
+          image: registry.cn-beijing.aliyuncs.com/kinnylee/user-service-kubernetes:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
+          env:
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: JAVA_OPTS
+                  name: java-opts
+            - name: EUREKA_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: eureka-server
+                  name: eureka-server
+          resources:
+            requests:
+              cpu: 200m
+              memory: 1Gi
+            limits:
+              cpu: 300m
+              memory: 1Gi
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/info
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/info
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 20
+
