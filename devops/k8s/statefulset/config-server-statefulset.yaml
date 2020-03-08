@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: test
+  name: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server
+  serviceName: config-server
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      imagePullSecrets:
+        - name: aliyun-registry
+      containers:
+        - name: config-server
+          image: registry.cn-beijing.aliyuncs.com/kinnylee/config-server-kubernetes:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
+          env:
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: JAVA_OPTS
+                  name: java-opts
+            - name: EUREKA_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: eureka-server
+                  name: eureka-server
+            - name: GIT_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_URI
+                  name: git-config
+            - name: GIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: GIT_USERNAME
+                  name: git-secret
+            - name: GIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: GIT_PASSWORD
+                  name: git-secret
+          resources:
+            requests:
+              cpu: 500m
+              memory: 2Gi
+            limits:
+              cpu: 500m
+              memory: 2Gi
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/info
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/info
+            initialDelaySeconds: 20
+            periodSeconds: 10
+

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eureka-server
+  namespace: test
+spec:
+  replicas: 3
+  serviceName: eureka-server
+  selector:
+    matchLabels:
+      app: eureka-server
+  template:
+    metadata:
+      name: eureka-server
+      labels:
+        app: eureka-server
+    spec:
+      imagePullSecrets:
+        - name: aliyun-registry
+      containers:
+        - name: eureka-server
+          image: registry.cn-beijing.aliyuncs.com/kinnylee/eureka-server:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
+          env:
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: JAVA_OPTS
+                  name: java-opts
+            - name: EUREKA_INSTANCE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: EUREKA_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: eureka-server-defaultZone
+                  name: eureka-server
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 8080
+              path: /actuator/info
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 8080
+              path: /actuator/info
+

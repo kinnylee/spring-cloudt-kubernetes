@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: java-opts
+  namespace: test
+data:
+  JAVA_OPTS: "-Xms1G -Xmx1G"

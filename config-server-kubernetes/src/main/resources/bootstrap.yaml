@@ -1,0 +1,16 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.1.4:8080/eureka
+
+spring:
+  application:
+    name: config-server  # 应用名称
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://github.com/kinnylee/springcloud-config
+#          username: kinnylee
+#          password: aaa@@@55555
+#          default-label: master #配置文件分支
